@@ -20,9 +20,9 @@ a,
 a:hover,
 a:focus,
 a:active {
-  text-decoration: none;
+  text-decoration: underline black;
   color: black;
-  font-weight: 600;
+  font-weight: 400;
   margin: 0.5rem 0;
   cursor: pointer;
 }
@@ -64,6 +64,10 @@ form {
   margin: 0.5rem 0;
 }
 
+/* name tag */
+.name-tag {
+  text-align: right;
+}
 /* nav */
 nav,
 ul {
@@ -130,10 +134,32 @@ td {
 }
 th {
   background-color: #f2f2f2;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 600;
+  a {
+    font-weight: 600;
+  }
 }
 tr:nth-child(even) {
   background-color: #f9f9f9;
 }
 tr:hover {
   background-color: #f1f1f1;
+}
+
+/* messages */
+.ok,
+.err {
+  margin: 1rem 0;
+  font-weight: 600;
+}
+
+.ok {
+  color: #8250df;
+}
+
+.err {
+  color: #333;
+  background-color: #fcce0d;
 }
