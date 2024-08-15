@@ -33,30 +33,33 @@ if (isset($_POST["student-id"]) &&
         $query = "SELECT * FROM students WHERE id='$idIncoming';";
         $result = $mysqli->query($query);
         $record = $result->fetch_row();
+        $idFromDB = $record[1];
 
         // if it's unique OR it's the same with its own
-        if($record == null || $record[1] == $idCurrent) {
-            // OK
+        switch ($type) {
+            case 'update':
+                if($record == null || $idFromDB == $idCurrent) {
+                    // OK
+                    $query = "UPDATE students SET id='$idIncoming', firstname='$firstname', lastname='$lastname' WHERE id='$idCurrent'";
+                    $result = $mysqli->query($query);      
+                    $messages = ["<p class='ok'>Record Updated: ".$idIncoming." ".$firstname." ".$lastname."</p>"];                                              
+                    } else {
+                    // NOT OK (duplicate)
+                    $messages = ["<p class='err'>That ID already exists.</p>"];
+                } 
+                break;
 
-            switch ($type) {
-                case 'add':
+            case 'add':
+                if($record == null) {
+                    // OK
                     $query = "INSERT INTO students VALUES(null, '$idIncoming', '$firstname', '$lastname')";
                     $result = $mysqli->query($query);
                     $messages = ["<p class='ok'>Record Added: ".$idIncoming." ".$firstname." ".$lastname."</p>"]; 
-
-                    break;
-
-                case 'update':
-                    $query = "UPDATE students SET id='$idIncoming', firstname='$firstname', lastname='$lastname' WHERE id='$idCurrent'";
-                    $result = $mysqli->query($query);      
-                    $messages = ["<p class='ok'>Record Updated: ".$idIncoming." ".$firstname." ".$lastname."</p>"];                      
-                    break;
-                
-            }
-        } else {
-            // NOT OK (duplicate)
-            $messages = ["<p class='err'>That ID already exists.</p>"];
-        } 
+                } else {
+                    // NOT OK (duplicate)
+                    $messages = ["<p class='err'>That ID already exists.</p>"];
+                } 
+        }
     } else {
         // Invalid pattern
         $messages = ["<p class='err'>The student ID you entered is incorrect. It must be in the format A0#######.</p>"];
