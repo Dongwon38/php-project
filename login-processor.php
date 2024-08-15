@@ -17,12 +17,9 @@ if (mysqli_connect_errno() != 0) {
 if (isset($_POST["username"]) &&
     isset($_POST["password"])) {
     // if it exists
-    $user = trim($_POST["username"]);
-    $pass = trim($_POST["password"]);
-
-    echo "<p>user: ".$user."</p>";
-    echo "<p>pass: ".$pass."</p>";
-}
+    $username = trim($_POST["username"]);
+    $password = trim($_POST["password"]);
+    }
 
 $username = $db->real_escape_string($username);
 
@@ -30,7 +27,7 @@ $query = "SELECT password FROM secure_users WHERE BINARY username='$username';";
 $result = $db -> query($query);
 
 if($result->num_rows != 1){
-	$_SESSION['errorMessages'] = "<p class='error'>Invalid username. Try again...</p>";
+	$_SESSION['errors'] = array ("<p class='error'>Invalid username. Try again...</p>");
 	header("Location: main.php");
 	die();
 }
@@ -59,21 +56,21 @@ $passwordFieldFromDatabase = $record['password'];
 
 
 if(password_verify( $password, $passwordFieldFromDatabase) == false ){
-	$_SESSION['errorMessages'] = "<p class='error'>Invalid password. Try again...</p>";
+	$_SESSION['errors'] = array ("<p class='error'>Invalid password. Try again...</p>");
 	header("Location: index.php");
 	die();	
 }
 
 
 
-// else {
-//     // All Good
-//     $_SESSION["username"] = $user;
-//     $_SESSION['timeLoggedIn'] = time();
-//     $_SESSION['timeLastActive'] = time();
+else {
+    // All Good
+    $_SESSION["username"] = $user;
+    $_SESSION['timeLoggedIn'] = time();
+    $_SESSION['timeLastActive'] = time();
 
-//     header("location: main.php");
-//     exit();
-// }
+    header("location: main.php");
+    exit();
+}
 
 ?>
