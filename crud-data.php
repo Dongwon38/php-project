@@ -120,15 +120,15 @@ if ($type == "delete") {
     echo "<form action='crud-processor.php' method='POST'>";
     echo "<div class='input-box'>";
     echo "        <label for='student-id'>Student #</label>";
-    echo "        <input type='text' name='student-id' id='student-id' value=$valueId>";
+    echo "        <input type='text' name='student-id' id='student-id' value='$valueId' required>";
     echo "    </div>";
     echo "    <div class='input-box'>";
     echo "        <label for='firstname'>Firstname</label>";
-    echo "        <input type='text' name='firstname' id='firstname' value=$valueFirstname>";
+    echo "        <input type='text' name='firstname' id='firstname' value='$valueFirstname' required>";
     echo "    </div>";
     echo "    <div class='input-box'>";
     echo "        <label for='lastname'>Lastname</label>";
-    echo "        <input type='text' name='lastname' id='lastname' value=$valueLastname>";
+    echo "        <input type='text' name='lastname' id='lastname' value='$valueLastname' required>";
     echo "    </div>";
     echo "    <input type='submit' value='Submit'>";
     echo "</form>";
