@@ -24,7 +24,7 @@ if (isset($_POST["username"]) &&
     echo "<p>pass: ".$pass."</p>";
 }
 
-$query = "SELECT * FROM users WHERE BINARY username='$user';";
+$query = "SELECT * FROM secure_users WHERE BINARY username='$user';";
 $result = $db -> query($query);
 
 if ($oneRecord = $result->fetch_row()) {
