@@ -24,34 +24,56 @@ if (isset($_POST["username"]) &&
     echo "<p>pass: ".$pass."</p>";
 }
 
-$query = "SELECT * FROM secure_users WHERE BINARY username='$user';";
+$username = $db->real_escape_string($username);
+
+$query = "SELECT password FROM secure_users WHERE BINARY username='$username';";
 $result = $db -> query($query);
 
-if ($oneRecord = $result->fetch_row()) {
-    // username Found
-
-    // Password check
-    if ($pass != $oneRecord[2]) {
-        // Password NOT Found
-        $errors[] = "<p>It is Invaild for user <strong>$user</strong>. Try again...</p>"; 
-    }
-} else {
-    // username NOT Found
-    $errors[] = "<p>Invalid username. Try again...</p>";
+if($result->num_rows != 1){
+	$_SESSION['errorMessages'] = "<p class='error'>Invalid username. Try again...</p>";
+	header("Location: main.php");
+	die();
 }
 
-if (count($errors) > 0) {
-    $_SESSION["errors"] = $errors;
-    header("location: index.php");
-    exit();
-} else {
-    // All Good
-    $_SESSION["username"] = $user;
-    $_SESSION['timeLoggedIn'] = time();
-    $_SESSION['timeLastActive'] = time();
+// if ($oneRecord = $result->fetch_row()) {
+//     // username Found
 
-    header("location: main.php");
-    exit();
+//     // Password check
+//     if ($pass != $oneRecord[2]) {
+//         // Password NOT Found
+//         $errors[] = "<p>It is Invaild for user <strong>$user</strong>. Try again...</p>"; 
+//     }
+// } else {
+//     // username NOT Found
+//     $errors[] = "<p>Invalid username. Try again...</p>";
+// }
+
+// if (count($errors) > 0) {
+//     $_SESSION["errors"] = $errors;
+//     header("location: index.php");
+//     exit();
+// } 
+
+$record = $result->fetch_assoc();
+$passwordFieldFromDatabase = $record['password'];
+
+
+if(password_verify( $password, $passwordFieldFromDatabase) == false ){
+	$_SESSION['errorMessages'] = "<p class='error'>Invalid password. Try again...</p>";
+	header("Location: index.php");
+	die();	
 }
+
+
+
+// else {
+//     // All Good
+//     $_SESSION["username"] = $user;
+//     $_SESSION['timeLoggedIn'] = time();
+//     $_SESSION['timeLastActive'] = time();
+
+//     header("location: main.php");
+//     exit();
+// }
 
 ?>
