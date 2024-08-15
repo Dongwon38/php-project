@@ -48,6 +48,7 @@ if (isset($_SESSION["errors"])) {
         <input type="submit" value="Submit">
     </form>
     </section>
+    
     </main>
     <footer>
     </footer>
