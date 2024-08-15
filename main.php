@@ -25,20 +25,19 @@ require_once "security.php";
 <body>
 <div id="wrapper">
     <header>
-        <h1>PHP & MySQL</h1>
+        <h1>Student List</h1>
         <img src="./images/bg.jpg" alt="illustrated-country">
     </header>
-
+    <h3 class="name-tag">Project by: Gustavo & Dongwon</h3>
     <main>
     <nav>
         <ul>
-            <li><a href="main.php">Show all</a></li>
+            <li><a href="main.php">Go to the list</a></li>
         </ul>
     </nav>
     <section class="section-1">
     <?php
-    echo "<h2>Logged in</h2>";
-    echo "<p>Hello, ".$_SESSION['username']. ". You are authorized to view the content.</p>";
+    echo "<p>Hello, <strong>".$_SESSION['username']. "</strong>. You are authorized to view the content.</p>";
     echo "<p><a href='logout.php'>Logout</a></p>";
     ?>
     </section>

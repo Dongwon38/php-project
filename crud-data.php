@@ -25,14 +25,14 @@ require_once "security.php";
 <body>
 <div id="wrapper">
     <header>
-        <h1>Add Student</h1>
+        <h1>CRUD data</h1>
         <img src="./images/bg.jpg" alt="illustrated-country">
     </header>
-
+    <h3 class="name-tag">Project by: Gustavo & Dongwon</h3>
     <main>
     <nav>
         <ul>
-            <li><a href="main.php">Show all</a></li>
+            <li><a href="main.php">Go to the list</a></li>
         </ul>
     </nav>
     <section class="section-crud">
@@ -47,13 +47,13 @@ if (mysqli_connect_errno() != 0) {
 if (isset($_GET['type'])) {
     switch ($_GET['type']) {
         case 'add':
-            $type = "Add";
+            $type = "add";
             break;
         case 'delete':
             $type = "delete";
             break;
         case 'update':
-            $type = "Update";
+            $type = "update";
             break;
         }
     $_SESSION['type'] = $type;

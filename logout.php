@@ -27,7 +27,7 @@ require_once "security.php";
             <h1>log out page</h1>
             <img src="./images/bg.jpg" alt="illustrated-country">
         </header>
-
+        <h3 class="name-tag">Project by: Gustavo & Dongwon</h3>
         <main>
         <section class="section-1">
 <?php
