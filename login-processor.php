@@ -32,25 +32,6 @@ if($result->num_rows != 1){
 	die();
 }
 
-// if ($oneRecord = $result->fetch_row()) {
-//     // username Found
-
-//     // Password check
-//     if ($pass != $oneRecord[2]) {
-//         // Password NOT Found
-//         $errors[] = "<p>It is Invaild for user <strong>$user</strong>. Try again...</p>"; 
-//     }
-// } else {
-//     // username NOT Found
-//     $errors[] = "<p>Invalid username. Try again...</p>";
-// }
-
-// if (count($errors) > 0) {
-//     $_SESSION["errors"] = $errors;
-//     header("location: index.php");
-//     exit();
-// } 
-
 $record = $result->fetch_assoc();
 $passwordFieldFromDatabase = $record['password'];
 
@@ -61,11 +42,9 @@ if(password_verify( $password, $passwordFieldFromDatabase) == false ){
 	die();	
 }
 
-
-
 else {
     // All Good
-    $_SESSION["username"] = $user;
+    $_SESSION["username"] = $username;
     $_SESSION['timeLoggedIn'] = time();
     $_SESSION['timeLastActive'] = time();
 
